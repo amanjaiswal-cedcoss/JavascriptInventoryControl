@@ -1,7 +1,7 @@
 #addProductDiv {
   display: flex;
   flex-direction: column;
-  width: 96%;
+  width: 320px;
   align-items: baseline;
   height: 200px;
   justify-content: space-between;
@@ -9,28 +9,14 @@
 }
 #addProductDiv div {
   width: 100%;
-}
-#id label {
-  margin-right: -1px;
-}
-#price label {
-  margin-right: 6px;
-}
-#idInput {
-  margin-left: 6%;
-}
-#nameInput {
-  margin-left: 4%;
-}
-#priceInput {
-  margin-left: 4%;
+  display: flex;
+  justify-content: space-between;
 }
 #btnAddProduct {
-  padding: 0% 0% 0% 0%;
   border: 2px solid black;
   background-color: white;
-  width: 16%;
-  height: 25%;
+  height: 50px;
+  padding: 5px 10px;
 }
 #form input {
   height: 25px;
@@ -53,8 +39,14 @@ th {
 #productTable td {
   background-color: #d7d7d7;
 }
-.btnEditDelete{
+.btnDelete{
     padding: 5px 10px;
     margin: 0 10px;
     font-weight: 700;
+}
+.btnQuantityUpdate{
+  padding: 2px 8px;
+    margin: 0 5px;
+    font-weight: 600;
+    font-size: 15px;
 }

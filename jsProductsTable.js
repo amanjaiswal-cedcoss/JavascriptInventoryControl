@@ -1,35 +1,25 @@
 const arr = [];
-let indexEdit=-1;
+
 function renderTable(){
   if(arr.length==0){
     document.getElementById("productTable").style.display = "none";
   }
   else{
-  let text="<tr><th>Product Id</th><th>Product Name</th><th>Product Price</th><th>Actions</th></tr>";
+  let text="<tr><th>Product Id</th><th>Product Name</th><th>Product Price</th><th>Quantity</th><th>Action</th></tr>";
   for(i=0;i<arr.length;i++)
   {
-    text += "<tr><td>" + arr[i].id + "</td><td>" + arr[i].name + "</td><td>" + arr[i].price + "</td><td><button class='btnEditDelete' onclick='editProduct("+i+")'>Edit</button><button class='btnEditDelete' onclick='deleteProduct("+i+")'>Delete</button></td></tr>";
+    text += "<tr><td>" + arr[i].id + "</td><td>" + arr[i].name + "</td><td>" + arr[i].price + "</td><td><button class='btnQuantityUpdate' onclick='updateQuantity(this,"+i+")'>-</button>"+arr[i].quantity+"<button class='btnQuantityUpdate' onclick='updateQuantity(this,"+i+")'>+</button></td><td><button class='btnDelete' onclick='deleteProduct("+i+")'>Delete</button></td></tr>";
   }
   document.getElementById("productTable").innerHTML = text;
 }
 }
-function addUpdateProduct(event) {
-  if(event.innerText=="ADD PRODUCT"){
-     arr.push({
-      id: document.getElementById("idInput").value,
-      name: document.getElementById("nameInput").value,
-      price: document.getElementById("priceInput").value,
-    });
-  }
-  else if(event.innerText=="UPDATE PRODUCT"){
-  arr[indexEdit].id = document.getElementById("idInput").value 
-  arr[indexEdit].name = document.getElementById("nameInput").value 
-  arr[indexEdit].price = document.getElementById("priceInput").value 
-  event.innerText="ADD PRODUCT"
-  } 
-  document.getElementById("idInput").value = '';
-  document.getElementById("nameInput").value = '';
-  document.getElementById("priceInput").value = '';
+function addProduct() {
+  let formRef=document.getElementById("addProductDiv");
+  const Fdata = new FormData(formRef);
+  let formData={};
+  for([key,val] of Fdata){Object.assign(formData,{[key]:val})}
+  arr.push(formData)
+  formRef.reset();
   renderTable();
 }
 
@@ -38,10 +28,12 @@ function deleteProduct(index){
   renderTable();
 }
 
-function editProduct(index){
-  document.getElementById("idInput").value = arr[index].id;
-  document.getElementById("nameInput").value = arr[index].name;
-  document.getElementById("priceInput").value = arr[index].price;
-  indexEdit=index;
-  document.getElementById("btnAddProduct").innerText="UPDATE PRODUCT"
+function updateQuantity(event,index){
+  if(event.innerText=="+"){
+    arr[index].quantity++;
+  }
+  else if(event.innerText=="-"){
+    arr[index].quantity--;
+  }
+  renderTable();
 }
