@@ -17,7 +17,13 @@ function addProduct() {
   let formRef=document.getElementById("addProductDiv");
   const Fdata = new FormData(formRef);
   let formData={};
-  for([key,val] of Fdata){Object.assign(formData,{[key]:val})}
+  for([key,val] of Fdata){
+    if(val===""){
+      alert("Please fill all the fields!")
+      return
+    }
+    Object.assign(formData,{[key]:val})
+  }
   arr.push(formData)
   formRef.reset();
   renderTable();
